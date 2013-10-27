@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Care.Data opt out</title>
+<meta name="generator" content="Bluefish 2.2.4" >
+<link href="css/redmond/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.js"></script>
+<script>
+$(function() {
+    $("#PracticeList").hide();
+	$("#accordion").accordion({active:0,heightStyle:"content"});
+	$("#findprac").button();
+	$("#findprac").on("click", function () {
+		$("#PracticeList").load("find",'postcode='+$("#loccode")[0].value,function (result,code,message) {
+			$("#PracticeList").slideDown();
+			$("span",$("#PracticeList")).button();
+			$("span",$("#PracticeList")).on("click", function () {
+					$("#picked")[0].value=this.title;
+					$("#accordion").accordion("option","active",1);
+					$("#MyPractice").text($('h4',$('#'+this.title)).text());
+					if ($("#pracemail",$('#'+this.title)).length) { $('#email').show(); $('#noemail').hide(); $('#useremail').required=false;}
+					else { $('#email').hide(); $('#noemail').show(); $('#useremail').required=true;}
+					})
+			$("#addr4")[0].value=$("#loccode")[0].value.toUpperCase();//postcode in the address form
+				
+		})
+
+	})
+	
+	
+	function noenter(e) {
+		if ( e.keyCode == 13) {
+			$('#findprac').click(); //if we press enter trigger the click event of the button above
+			return false;
+			}
+		else { return true; }
+	}
+	
+	$("#loccode").keypress(noenter);
+	
+	$("#letter").button();
+	$("#letter").on("click", function () {
+			$("#detailForm")[0].action="letter";
+			$("#detailForm").submit();
+		})
+
+	$("#doneAddress").button();
+	$("#doneAddress").on("click", function () {
+		$("#accordion").accordion('option','active',2);
+	})
+	
+	$("#gmail").button();
+	$("#dob").datepicker({ dateFormat: "dd/mm/yy" });
+	$("#senduser").button();
+	$("#senduser").on("click", function () {
+			$("#detailForm")[0].action="email";
+			$("#detailForm").submit();
+	})
+			
+
+
+	function enterDetails() {
+		$("#accordion").accordion("option","active",2);
+	}
+})
+
+</script>
+</head>
+<body>
+	<form name="detailForm" id="detailForm" method="POST" target="email">
+<h2 class="demoHeaders">How to Opt Out</h2>
+<!--  -->
+<div id="accordion">
+	<h3>Find Your Practice</h3>
+	<div><input type="text" name="location" id="loccode" size="30" maxlength="30" /><span name="find" id="findprac" value="Find A Practice">Find Your Practice</span>
+	<div id="PracticeList"></div></div>
+	
+	<h3>Your Details</h3>
+
+
+	<div>Your Name<br><input type="text" name="name" size="30" maxlength="30" required />
+	<br>Your Address<br><input type="text" name="addr1" required /><br><input type="text" name="addr2" /><br><input type="text" name="addr3" /><br><input id="addr4" type="text" name="addr4" />
+	<br>Your date of birth dd/mm/yyyy (to help identify you)
+	<br><input type="date" name="dob" id="dob" />
+	<input id="picked" type="hidden" name="practice" value="None" >
+	<span id="doneAddress">Next &gt;</span>
+	</div><!--</form>-->
+	<h3>Send It</h3>
+	<div>
+		<p>Send the message to <span id="MyPractice"></span> 
+		<br>
+		<h4>Send your request by email: </h4><br>
+		Your email address: <input type="email" id="fromemail" name="fromemail" />
+		<label>Send me a copy<input type="checkbox" id="sendcopy" name="sendcopy" /></label>
+		<br>
+		<div id="noemail">We do not have an email address for this practice. If you know of one enter it below<br>
+			<input type="email" name="useremail" id="useremail" size=40 />
+			</div>
+			
+		<div id="recaptcha">
+		 <script type="text/javascript"
+     src="http://www.google.com/recaptcha/api/challenge?k=6Le4-ecSAAAAAOZYm0Hr4K3WqU5rXOj-g2gZpPmC">
+		</script>
+		<noscript>
+		<iframe src="http://www.google.com/recaptcha/api/noscript?k=6Le4-ecSAAAAAOZYm0Hr4K3WqU5rXOj-g2gZpPmC"
+         height="300" width="500" frameborder="0"></iframe><br>
+		<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+		</textarea>
+		<input type="hidden" name="recaptcha_response_field"
+         value="manual_challenge">
+		</noscript></div>
+		<button id="senduser" name="email">Send email from this site</button>
+		
+		
+		
+<!--		<button name="gmail" id="gmail">Send via your Gmail</button> -->
+		<span id="SelPracEmail"></span></p><span id="letter" name="letter">Download a customised letter</span></div>
+	</div>
+	
+</div>
+</form>
+</body>
+</html>

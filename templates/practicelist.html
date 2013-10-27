@@ -1,0 +1,12 @@
+{% for practice in practicelist %}
+<div id="{{ practice.key.string_id() }}" class="practice">
+<h4>{{ practice.name }}</h4>
+<p>{{ practice.addrstring() }}</p>
+{% if practice.bestemail()!=None %}
+<p id="pracemail">Email : {{ practice.bestemail()|default }}</p>
+{% endif %}
+<span title="{{ practice.key.string_id() }}" id="pracbut" name="{{ practice.name }}">Select this practice</span>
+</div>
+
+{% endfor %}
+<img src="{{ logo }}" />{{ tracking }}

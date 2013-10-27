@@ -1,0 +1,19 @@
+{{ practice.name }} {% for addrline in practice.addressline() %}, {{ addrline }}{% endfor %}
+
+Dear Sir/Madam
+
+This is to inform you that I do not give my consent for personal confidential data to leave the practice for secondary uses (i.e. uses other than my health care)
+
+Please enter one of the following codes into my computer record.
+
+Read code : 9Nu0
+CTV3 code: XaZ89
+Snomed CT: 827241000000103
+
+Yours sincerely
+
+{{ user.name }}
+{{ user.dob }}
+{% for addrline in user.addressline() %}{{addrline}}
+{% endfor %}
+  
