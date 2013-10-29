@@ -1,0 +1,5 @@
+This is a short program to write a letter to opt out of the NHS care.data extration. For more information about that project see http://care-data.info/
+It is designed to send a letter to the GP. As a side effect it would crowd source practice email addresses.
+It runs under Google App Engine, athough this does have some fairly tough limits on the emails that can be send. It should not be too difficult to port to other databases.
+Most of the work is done by javascript on the client side (the main page will load statically).
+
