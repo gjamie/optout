@@ -66,7 +66,7 @@ class request_email(ndb.Model):
 			message.to="%s <%s>" % (recipient.name,recipient.bestemail())
 			self.senttoemail=recipient.bestemail()
 		else :
-			message.to="%s <%s>" % (recipeint.name,customemail)
+			message.to="%s <%s>" % (recipient.name,customemail)
 			self.senttoemail=customemail
 		message.headers={'On-Behalf-Of':self.useremail}
 		message.cc=self.useremail
